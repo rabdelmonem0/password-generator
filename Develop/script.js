@@ -5,21 +5,26 @@ var specialCharacters = ["!","@","#","$","%","^","&","*","(",")","-","_","=","+"
 var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
+var numChar;
+var specialChar;
+var upperCaseChar;
+var lowerCaseChar;
+
 function generatePassword(){
   var passwordOptions = generatePasswordOptions();  
   // empty array to push final password characters into
   var result = [];
 
   // variable to store ALL the possible characters - starts as empty array
+  var possibelChars = [];
   // variable to store an array that has one of each type chosen to - initialized as empty array
-
   // check the passwordOptions to see what characters the user wants
     // if user wants uppercase, possibleCharacters = possibleCharacters.concat(uppercase)
       // then push getRandom(uppercase) into the guaranteed options
 
-      // console.log("LINE 18 CHECKING CHARACTERS----", variable you're checking)
 
   // loop through passwordOptions
+
     // for each iteration, possibleCharacter = getRandom(possible)
     // push the random possible character into the result array
 
@@ -28,7 +33,7 @@ function generatePassword(){
   // loop through the guaranteed characters and replace the result[i] with the guaranteed character[i]
   // for (var i=0; i<guarChars.length; i++) {
   //   // replacing character at index i in result with character at index i in guaranteed
-  //   result[i] = guarChar[i]
+  //   result[i] = guarChars[i]
   // }
 
   // return result (turn the array into a string)
@@ -43,8 +48,8 @@ function generatePasswordOptions() {
     return;
   } 
 
-  if (passwordLength < 8 || passwordLength > 120) {
-    alert("Password length must be between 8 and 120 characters");
+  if (passwordLength < 8 || passwordLength > 128) {
+    alert("Password length must be between 8 and 128 characters");
     return;
   }
 
@@ -54,25 +59,46 @@ function generatePasswordOptions() {
   var lowerCase = confirm("would you like lowercase letters?");
 
   // Check if all the prompts false -> then alert that password must contain at least one character type. Then return to go through again
+  if (!numbers && !specialCharacters && !upperCase && !lowerCase) {
+    alert("Password must contain at least one character type.")
+    return;
+  }
 
+  // if (numChar) {
+  //   passwordOptions = numbers
+  // }
+  // if (specialChar) {
+  //   passwordOptions = specialCharacters
+  // }
+  // if (upperCaseChar) {
+  //   passwordOptions = upperCase
+  // }
+  // if (lowerCaseChar) {
+  //   passwordOptions = lowerCase
+  // }
+
+  if (passwordOptions.hasNumbers) {
+    possibelChars.concat(numbers)
+    result.push(numbers[randomNumber])
+  }
+  if (passwordOptions.hasSpecialCharacters) {
+    possibelChars.concat(specialCharacters)
+    result.push(specialCharacters[randomNumber])
+  }
+  if (passwordOptions.hasLowerCase) {
+    possibelChars.concat(numbers)
+    result.push(lowerCase[randomNumber])
+  }
+  if (passwordOptions.hasUpperCase) {
+    possibelChars.concat(specialCharacters)
+    result.push(upperCase[randomNumber])
+  }
   // store passwordOptions in a variable
   var passwordOptions = {
-    hasSpecialCharacters: specialCharacters,
-  }
-  
-  var passwordOptions = {
+    hasSpecialCharacters: specialCharacters, 
     hasNumbers: numbers,
-  }
-  
-  var passwordOptions = {
     hasUpperCase: upperCase,
-  }
-  
-  var passwordOptions = {
     hasLowerCase: lowerCase,
-  }
-  
-  var passwordOptions = {
     length: passwordLength,
   }
 
@@ -81,12 +107,17 @@ function generatePasswordOptions() {
 }
 
 // Function to get random element from array
-function getRandom(arr) {
-  var randomIndex = Math.floor(Math.random() * arr.length);
-  var randomEl = arr[randomIndex];
+function getRandom(passwordOptions) {
+  var randomIndex = Math.floor(Math.random() * passwordOptions.length);
+  var randomEl = passwordOptions[randomIndex];
 
   return randomEl;
-}
+// }
+// for (var i = 0; i < passwordLength; i++) {
+//   var randomChar = passwordOptions[Math.floor(Math.random() * passwordOptions.length)];
+//   randomResult.push(randomChar);
+// }
+
 
 var generateBtn = document.querySelector("#generate");
 
@@ -100,11 +131,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-
-// var passwordLength = prompt("How many characters would you like the password to be?");
-
-
-
-
-
