@@ -1,6 +1,6 @@
 // Assignment Code
 // Character variables 
-// var pass = randomPassword.join(""); 
+
 var possibelChars = [];
 var result = [];
 
@@ -44,8 +44,10 @@ function generatePassword(){
   // return result (turn the array into a string)
 }
 
+var passwordLength = parseInt(prompt("How many characters would you like the password to be?"));
+
 function generatePasswordOptions() {
-  var passwordLength = parseInt(prompt("How many characters would you like the password to be?"));
+  
 
   // Check if passwor length is not a number, if so return to beginning
   if (isNaN(passwordLength)) {
@@ -120,14 +122,15 @@ function getRandom(array) {
   var randomIndex = Math.floor(Math.random() * array.length);
   console.log(randomIndex);
   var randomEl = array[randomIndex];
-console.log(randomEl);
+  console.log(randomEl);
   return randomEl;
 }
-// for (var i = 0; i < passwordLength; i++) {
-//   var randomChar = passwordOptions[Math.floor(Math.random() * passwordOptions.length)];
-//   randomResult.push(randomChar);
-// }
+for (var i = 0; i < passwordLength; i++) {
+  var randomChar = passwordOptions[Math.floor(Math.random() * passwordOptions.length)];
+  result.push(randomChar);
+}
 
+var pass = randomPassword.join(""); 
 
 var generateBtn = document.querySelector("#generate");
   
