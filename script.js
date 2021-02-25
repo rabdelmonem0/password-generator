@@ -18,20 +18,20 @@ function generatePassword(){
   var passwordOptions = generatePasswordOptions()
 
   if (passwordOptions.hasNumbers) {
-    possibleChars.concat(numbers)
+    possibleChars = possibleChars.concat(numbers)
     // console.log(numbers)
     result.push(getRandom(numbers))
   }
   if (passwordOptions.hasSpecialCharacters) {
-    possibleChars.concat(specialCharacters)
+    possibleChars = possibleChars.concat(specialCharacters)
     result.push(getRandom(specialCharacters))
   }
   if (passwordOptions.hasLowerCase) {
-    possibleChars.concat(lowerCase)
+    possibleChars = possibleChars.concat(lowerCase)
     result.push(getRandom(lowerCase))
   }
   if (passwordOptions.hasUpperCase) {
-    possibleChars.concat(upperCase)
+    poissibleChars = possibleChars.concat(upperCase)
     result.push(getRandom(upperCase))
   }
   console.log("result-1:", result)   // 2  + 6 more random elements from guaranteed
@@ -41,7 +41,7 @@ function generatePassword(){
   //     result[i] = guaranteed[i]
   // }
 
-var passwordLength = passwordLength + guaranteed.length
+var passwordLength = passwordOptions.length - guaranteed.length
 
   for (var i = 0; i < passwordLength; i++) {
     var randomChar = possibleChars[Math.floor(Math.random() * possibleChars.length)];
