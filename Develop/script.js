@@ -126,12 +126,13 @@ function getRandom(array) {
   return randomEl;
 }
 for (var i = 0; i < passwordLength; i++) {
-  var randomChar = passwordOptions[Math.floor(Math.random() * passwordOptions.length)];
+  var randomChar = possibelChars[Math.floor(Math.random() * possibelChars.length)];
   result.push(randomChar);
 }
 
 var pass = randomPassword.join(""); 
-
+// return pass;
+  
 var generateBtn = document.querySelector("#generate");
   
 
