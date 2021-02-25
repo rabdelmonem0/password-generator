@@ -11,42 +11,44 @@ var lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"
 
 
 function generatePassword(){
-  var possibelChars = [];
+  var possibleChars = [];
   var guaranteed = [];
   var result = [];
 
+  var passwordOptions = generatePasswordOptions()
+
   if (passwordOptions.hasNumbers) {
-    possibelChars.concat(numbers)
+    possibleChars.concat(numbers)
     // console.log(numbers)
     result.push(getRandom(numbers))
   }
   if (passwordOptions.hasSpecialCharacters) {
-    possibelChars.concat(specialCharacters)
+    possibleChars.concat(specialCharacters)
     result.push(getRandom(specialCharacters))
   }
   if (passwordOptions.hasLowerCase) {
-    possibelChars.concat(numbers)
+    possibleChars.concat(lowerCase)
     result.push(getRandom(lowerCase))
   }
   if (passwordOptions.hasUpperCase) {
-    possibelChars.concat(specialCharacters)
+    possibleChars.concat(upperCase)
     result.push(getRandom(upperCase))
   }
-
-  var passwordOptions = generatePasswordOptions();  
-  // empty array to push final password characters into
+  console.log("result-1:", result)   // 2  + 6 more random elements from guaranteed
   
-  for (var i = 0; i < guaranteed.length; i++) {
-      // replacing character at index i in result with character at index i in guaranteed
-      result[i] = guaranteed[i]
-  }
+  // for (var i = 0; i < guaranteed.length; i++) {
+  //     // replacing character at index i in result with character at index i in guaranteed
+  //     result[i] = guaranteed[i]
+  // }
+
+var passwordLength = passwordLength + guaranteed.length
 
   for (var i = 0; i < passwordLength; i++) {
-    var randomChar = possibelChars[Math.floor(Math.random() * possibelChars.length)];
+    var randomChar = possibleChars[Math.floor(Math.random() * possibleChars.length)];
     result.push(randomChar);
   }
-  
-  var pass = randomPassword.join(""); 
+  console.log("result-2: ", result)
+  var pass = result.join(""); 
   return pass;
 }
 
@@ -109,7 +111,7 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePasswordOptions();
+  var password = generatePassword();
   // console.log(result);
   var passwordText = document.querySelector("#password");
 
