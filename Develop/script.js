@@ -1,53 +1,60 @@
 // Assignment Code
 // Character variables 
 
-var possibelChars = [];
-var result = [];
+
 
 var numbers = [0,1,2,3,4,5,6,7,8,9];
 var specialCharacters = ["!","@","#","$","%","^","&","*","(",")","-","_","=","+"];
 var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
-// var numChar;
-// var specialChar;
-// var upperCaseChar;
-// var lowerCaseChar;
+
 
 function generatePassword(){
+  var possibelChars = [];
+  var guaranteed = [];
+  var result = [];
+
+  if (passwordOptions.hasNumbers) {
+    possibelChars.concat(numbers)
+    // console.log(numbers)
+    result.push(getRandom(numbers))
+  }
+  if (passwordOptions.hasSpecialCharacters) {
+    possibelChars.concat(specialCharacters)
+    result.push(getRandom(specialCharacters))
+  }
+  if (passwordOptions.hasLowerCase) {
+    possibelChars.concat(numbers)
+    result.push(getRandom(lowerCase))
+  }
+  if (passwordOptions.hasUpperCase) {
+    possibelChars.concat(specialCharacters)
+    result.push(getRandom(upperCase))
+  }
+
   var passwordOptions = generatePasswordOptions();  
   // empty array to push final password characters into
   
+  for (var i = 0; i < guaranteed.length; i++) {
+      // replacing character at index i in result with character at index i in guaranteed
+      result[i] = guaranteed[i]
+  }
 
-  // variable to store ALL the possible characters - starts as empty array
-
-    
-  // variable to store an array that has one of each type chosen to - initialized as empty array
-  // check the passwordOptions to see what characters the user wants
-    // if user wants uppercase, possibleCharacters = possibleCharacters.concat(uppercase)
-      // then push getRandom(uppercase) into the guaranteed options
-
-
-  // loop through passwordOptions
-
-    // for each iteration, possibleCharacter = getRandom(possible)
-    // push the random possible character into the result array
-
-    // Array.prototype.push()
-
-  // loop through the guaranteed characters and replace the result[i] with the guaranteed character[i]
-  // for (var i=0; i<guarChars.length; i++) {
-  //   // replacing character at index i in result with character at index i in guaranteed
-  //   result[i] = guarChars[i]
-  // }
-
-  // return result (turn the array into a string)
+  for (var i = 0; i < passwordLength; i++) {
+    var randomChar = possibelChars[Math.floor(Math.random() * possibelChars.length)];
+    result.push(randomChar);
+  }
+  
+  var pass = randomPassword.join(""); 
+  return pass;
 }
 
-var passwordLength = parseInt(prompt("How many characters would you like the password to be?"));
+
 
 function generatePasswordOptions() {
   
+  var passwordLength = parseInt(prompt("How many characters would you like the password to be?"));
 
   // Check if passwor length is not a number, if so return to beginning
   if (isNaN(passwordLength)) {
@@ -71,67 +78,31 @@ function generatePasswordOptions() {
     return;
   }
 
-  // if (numChar) {
-  //   passwordOptions = numbers
-  // }
-  // if (specialChar) {
-  //   passwordOptions = specialCharacters
-  // }
-  // if (upperCaseChar) {
-  //   passwordOptions = upperCase
-  // }
-  // if (lowerCaseChar) {
-  //   passwordOptions = lowerCase
-  // }
+ 
   var passwordOptions = {
+    length: passwordLength,
     hasSpecialCharacters: specialChar, 
     hasNumbers: numChar,
     hasUpperCase: upperCaseChar,
-    hasLowerCase: lowerCaseChar,
-    length: passwordLength,
+    hasLowerCase: lowerCaseChar,  
   }
   console.log(passwordOptions);
-  
-  if (passwordOptions.hasNumbers) {
-    possibelChars.concat(numbers)
-    console.log(numbers)
-    result.push(getRandom(numbers))
-  }
-  if (passwordOptions.hasSpecialCharacters) {
-    possibelChars.concat(specialCharacters)
-    result.push(getRandom(specialCharacters))
-  }
-  if (passwordOptions.hasLowerCase) {
-    possibelChars.concat(numbers)
-    result.push(getRandom(lowerCase))
-  }
-  if (passwordOptions.hasUpperCase) {
-    possibelChars.concat(specialCharacters)
-    result.push(getRandom(upperCase))
-  }
-  // store passwordOptions in a variable
- 
+  return passwordOptions;
 
-  
-  // return passwordOptions so it's usable outside this function scope
+ 
 }
 
 // Function to get random element from array
 function getRandom(array) {
-  console.log(array);
+  // console.log(array);
   var randomIndex = Math.floor(Math.random() * array.length);
-  console.log(randomIndex);
+  // console.log(randomIndex);
   var randomEl = array[randomIndex];
-  console.log(randomEl);
+  // console.log(randomEl);
   return randomEl;
 }
-for (var i = 0; i < passwordLength; i++) {
-  var randomChar = possibelChars[Math.floor(Math.random() * possibelChars.length)];
-  result.push(randomChar);
-}
 
-var pass = randomPassword.join(""); 
-// return pass;
+
   
 var generateBtn = document.querySelector("#generate");
   
@@ -139,7 +110,7 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
   var password = generatePasswordOptions();
-  console.log(result);
+  // console.log(result);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
