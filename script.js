@@ -45,8 +45,8 @@ function generatePassword(){
   console.log("result-2: ", result)
   var pass = result.join(""); 
   return pass;
-
 }
+
 
 
 
