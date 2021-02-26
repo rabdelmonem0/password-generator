@@ -1,6 +1,8 @@
 // Assignment Code
 // Character variables 
 
+
+
 var numbers = [0,1,2,3,4,5,6,7,8,9];
 var specialCharacters = ["!","@","#","$","%","^","&","*","(",")","-","_","=","+"];
 var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
@@ -33,9 +35,8 @@ function generatePassword(){
     result.push(getRandom(upperCase))
   }
   console.log("result-1:", result)   // 2  + 6 more random elements from guaranteed
-}
 
-var passwordLength = passwordOptions.length - guaranteed.length
+  var passwordLength = passwordOptions.length - guaranteed.length
 
   for (var i = 0; i < passwordLength; i++) {
     var randomChar = possibleChars[Math.floor(Math.random() * possibleChars.length)];
@@ -44,6 +45,9 @@ var passwordLength = passwordOptions.length - guaranteed.length
   console.log("result-2: ", result)
   var pass = result.join(""); 
   return pass;
+
+}
+
 
 
 function generatePasswordOptions() {
